@@ -1,20 +1,28 @@
 import { useEffect } from 'react';
-import { useStoriesAPI } from '../hooks/useStoriesAPI';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectDate } from '../../days';
 import { Story } from './Story';
+import { fetchStories, selectIds, selectStatus } from '../state';
+import { Error, Loading } from '../../../app';
 
 const Stories = () => {
-  const { error, loading, storyIds, getStories } = useStoriesAPI();
+  const dispatch = useDispatch();
+  const date = useSelector(selectDate);
+  const storyIds = useSelector(selectIds({ date }));
+  const status = useSelector(selectStatus({ date }));
 
   useEffect(() => {
-    getStories();
-  }, []);
+    if (status === 'idle') {
+      dispatch(fetchStories({ date }));
+    }
+  }, [date]);
 
-  if (error) {
-    return <p>エラー: {error.message}</p>;
+  if (status === 'pending') {
+    return <Loading />;
   }
 
-  if (loading) {
-    return <p>読み込み中...</p>;
+  if (status === 'rejected') {
+    return <Error />;
   }
 
   return (

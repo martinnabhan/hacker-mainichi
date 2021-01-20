@@ -11,7 +11,7 @@ module.exports = {
       colors: {
         body: '#fafafa',
         borderColor: '#f0f0f0',
-        logo: '#506bf0',
+        primary: '#506bf0',
         subtitle: '#8a94a6',
         title: '#333333',
         visited: '#00d183',
