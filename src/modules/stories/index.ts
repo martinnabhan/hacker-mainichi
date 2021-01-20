@@ -1,4 +1,2 @@
-import { Stories } from './components/Stories';
-import { reducer } from './state';
-
-export { Stories, reducer };
+export * from './components/Stories';
+export * from './state';

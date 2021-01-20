@@ -1,3 +1,3 @@
-import { App } from './App';
-
-export { App };
+export * from './App';
+export * from './components/Error';
+export * from './components/Loading';
