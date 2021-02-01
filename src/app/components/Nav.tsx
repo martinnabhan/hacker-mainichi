@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { dayChanged, days, selectDay, yesterdayDay } from '../../modules/days';
 
 const classes = {
-  button: 'px-3 py-2 rounded-md text-sm font-medium',
+  button: 'px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium',
   active: 'bg-primary text-white cursor-default',
   inActive: 'text-subtitle hover:bg-title hover:text-white',
 };

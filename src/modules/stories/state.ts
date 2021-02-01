@@ -86,7 +86,9 @@ const fetchStories = createAsyncThunk('stories/fetchStories', async ({ date }: {
         visited: isVisited(id),
       }));
   } else {
-    const response = await fetch(`http://localhost:4568/hacker-mainichi/stories-${date}.json`);
+    const response = await fetch(
+      `${process.env.NODE_ENV === 'development' ? 'http://localhost:4568/hacker-mainichi' : ''}/stories/${date}.json`,
+    );
 
     if (response.status === 404) {
       throw new Error('404');
