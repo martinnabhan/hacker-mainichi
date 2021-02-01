@@ -2,10 +2,10 @@ import { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../../../app/reducer';
 import { selectDate } from '../../days';
-import { selectById, Story, storyVisited } from '../state';
+import { selectById, Story as IStory, storyVisited } from '../state';
 
 interface Props {
-  id: Story['id'];
+  id: IStory['id'];
 }
 
 const Story: FunctionComponent<Props> = ({ id }) => {

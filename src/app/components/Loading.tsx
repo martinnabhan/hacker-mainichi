@@ -30,8 +30,8 @@ const stories = Math.round(window.innerHeight / storyHeight);
 
 const Loading = () => (
   <>
-    {[...Array(stories)].map(_ => (
-      <Story />
+    {[...Array(stories).keys()].map(index => (
+      <Story key={index} />
     ))}
   </>
 );
