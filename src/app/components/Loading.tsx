@@ -26,7 +26,7 @@ const Story = () => (
 );
 
 const storyHeight = 110;
-const stories = Math.round(window.innerHeight / storyHeight);
+const stories = Math.round(1000 / storyHeight);
 
 const Loading = () => (
   <>

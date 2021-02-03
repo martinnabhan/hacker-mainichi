@@ -1,35 +1,42 @@
+import { useRouter } from 'next/dist/client/router';
+import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { dayChanged, days, selectDay, yesterdayDay } from '../../modules/days';
+import { dayChanged, getDateFromDay, selectDate, sortedDays, todayDate } from '../../modules/days';
 
-const classes = {
-  button: 'px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium',
-  active: 'bg-primary text-white cursor-default',
-  inActive: 'text-subtitle hover:bg-title hover:text-white',
-};
+const buttonClasses = 'px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium';
 
-const daysReverse = [...days].reverse();
-const yesterdayIndex = daysReverse.indexOf(yesterdayDay);
+const sortedDaysWithToday: Parameters<typeof dayChanged>[0]['day'][] = ['今日', ...sortedDays];
 
-const navDays: Parameters<typeof dayChanged>[0]['day'][] = [
-  '今日',
-  ...daysReverse.slice(yesterdayIndex),
-  ...daysReverse.slice(0, yesterdayIndex),
-];
+const links = sortedDaysWithToday.map(day => ({
+  date: day === '今日' ? todayDate : getDateFromDay(day),
+  day,
+}));
 
 const Nav = () => {
+  const currentDate = useSelector(selectDate);
   const dispatch = useDispatch();
-  const currentDay = useSelector(selectDay);
+  const router = useRouter();
 
-  const buttons = navDays.map(day => (
-    <button
-      className={`${classes.button} ${day === currentDay ? classes.active : classes.inActive}`}
-      disabled={day === currentDay}
-      key={day}
-      onClick={() => dispatch(dayChanged({ day }))}
-    >
-      {day}
-    </button>
-  ));
+  const buttons = links.map(({ date, day }) => {
+    if (router.route !== '/404' && date === currentDate) {
+      return (
+        <a className={`${buttonClasses} bg-primary text-white cursor-default`} key={date}>
+          {day}
+        </a>
+      );
+    }
+
+    return (
+      <Link href={day === '今日' ? '/' : `/${date}`} key={date}>
+        <a
+          className={`${buttonClasses} text-subtitle hover:bg-title hover:text-white`}
+          onClick={() => dispatch(dayChanged({ date, day }))}
+        >
+          {day}
+        </a>
+      </Link>
+    );
+  });
 
   return (
     <nav className="bg-white border-b border-borderColor shadow-sm">

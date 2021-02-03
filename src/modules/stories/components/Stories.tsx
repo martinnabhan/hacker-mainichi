@@ -1,21 +1,22 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDate } from '../../days';
+import { selectDate, todayDate } from '../../days';
 import { Story } from './Story';
-import { fetchStories, selectIds, selectStatus } from '../state';
+import { fetchTopStories, selectIds, selectStatus } from '../state';
 import { Error, Loading } from '../../../app';
+import NotFound from '../../../pages/404';
 
 const Stories = () => {
   const dispatch = useDispatch();
   const date = useSelector(selectDate);
+  const status = useSelector(selectStatus);
   const storyIds = useSelector(selectIds({ date }));
-  const status = useSelector(selectStatus({ date }));
 
   useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchStories({ date }));
+    if (date === todayDate && status === 'idle') {
+      dispatch(fetchTopStories());
     }
-  }, [date]);
+  }, []);
 
   if (status === 'pending') {
     return <Loading />;
@@ -23,6 +24,10 @@ const Stories = () => {
 
   if (status === 'rejected') {
     return <Error />;
+  }
+
+  if ((date !== todayDate || status === 'fulfilled') && storyIds.length === 0) {
+    return <NotFound message="ストーリーがありません。" />;
   }
 
   return (

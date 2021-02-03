@@ -1,2 +1,4 @@
-cdk.out/
+.next/
 dist/
+
+next.config.js
