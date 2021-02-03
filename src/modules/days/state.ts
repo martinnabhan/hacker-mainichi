@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { addDays, format, subDays } from 'date-fns';
+import { format, subDays } from 'date-fns';
 import { State } from '../../app/reducer';
 
 type Day = '月' | '火' | '水' | '木' | '金' | '土' | '日';
@@ -7,39 +7,36 @@ type Today = '今日';
 
 const dateFormat = 'yyyyMMdd';
 const days: Day[] = ['月', '火', '水', '木', '金', '土', '日'];
+const daysReverse = [...days].reverse();
 
-const todayDate = format(new Date(), dateFormat);
+const today = new Date();
+const todayDate = format(today, dateFormat);
 
-const yesterday = subDays(new Date(), 1);
-const yesterdayDate = format(yesterday, dateFormat);
+const dates = [...Array(days.length).keys()].map(index => format(subDays(today, index + 1), 'yyyyMMdd'));
+
+const yesterday = subDays(today, 1);
 const yesterdayDay = days[yesterday.getDay() - 1];
-const yesterdayIndex = days.indexOf(yesterdayDay);
+const yesterdayReverseIndex = daysReverse.indexOf(yesterdayDay);
+
+const sortedDays: Parameters<typeof dayChanged>[0]['day'][] = [
+  ...daysReverse.slice(yesterdayReverseIndex),
+  ...daysReverse.slice(0, yesterdayReverseIndex),
+];
+
+const getDateFromDay = (day: Day) => dates[sortedDays.indexOf(day)];
+const getDayFromDate = (date: string) => sortedDays[dates.indexOf(date)];
+
+const initialState = {
+  date: todayDate,
+  day: '今日' as Day | Today,
+};
 
 const { actions, reducer } = createSlice({
   name: 'days',
-  initialState: {
-    date: todayDate,
-    day: '今日' as Day | Today,
-  },
+  initialState,
   reducers: {
-    dayChanged: (state, { payload }: PayloadAction<{ day: Day | Today }>) => {
-      if (payload.day === '今日') {
-        state.date = todayDate;
-      } else {
-        const dayIndex = days.indexOf(payload.day);
-        const dayDiff = dayIndex - yesterdayIndex;
-
-        let dayDate = yesterdayDate;
-
-        if (dayDiff > 0) {
-          dayDate = format(subDays(yesterday, days.length - dayDiff), dateFormat);
-        } else if (dayDiff < 0) {
-          dayDate = format(addDays(yesterday, dayDiff), dateFormat);
-        }
-
-        state.date = dayDate;
-      }
-
+    dayChanged: (state, { payload }: PayloadAction<{ date: string; day: Day | Today }>) => {
+      state.date = payload.date;
       state.day = payload.day;
     },
   },
@@ -50,4 +47,17 @@ const { dayChanged } = actions;
 const selectDate = (state: State) => state.days.date;
 const selectDay = (state: State) => state.days.day;
 
-export { dayChanged, days, reducer, selectDate, selectDay, todayDate, yesterdayDay };
+export {
+  dayChanged,
+  dates,
+  days,
+  getDateFromDay,
+  getDayFromDate,
+  initialState,
+  reducer,
+  selectDate,
+  selectDay,
+  sortedDays,
+  todayDate,
+  yesterdayDay,
+};

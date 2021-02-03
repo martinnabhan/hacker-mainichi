@@ -11,7 +11,13 @@ interface Props {
 const Story: FunctionComponent<Props> = ({ id }) => {
   const dispatch = useDispatch();
   const date = useSelector(selectDate);
-  const { comments, score, title, visited } = useSelector((state: State) => selectById({ date })(state, id));
+  const story = useSelector((state: State) => selectById({ date })(state, id));
+
+  if (!story) {
+    return null;
+  }
+
+  const { comments, score, title, visited } = story;
 
   const handleClick = () => !visited && dispatch(storyVisited({ date, id }));
 
