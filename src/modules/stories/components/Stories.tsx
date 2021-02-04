@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDate, todayDate } from '../../days';
 import { Story } from './Story';
-import { fetchTopStories, selectIds, selectStatus } from '../state';
+import { selectIds, selectStatus } from '../state';
 import { Error, Loading } from '../../../app';
 import NotFound from '../../../pages/404';
+import { fetchTopStories } from '../api';
 
 const Stories = () => {
   const dispatch = useDispatch();
