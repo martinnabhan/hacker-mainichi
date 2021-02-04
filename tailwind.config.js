@@ -30,6 +30,9 @@ module.exports = {
         title: '#333333',
         visited: '#00d183',
       },
+      screens: {
+        'hover-hover': { raw: '(hover: hover)' },
+      },
     },
   },
 };

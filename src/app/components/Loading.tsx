@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 const desktopWidths = [
   'sm:w-4/12',
   'sm:w-5/12',
@@ -9,8 +11,10 @@ const desktopWidths = [
   'sm:w-11/12',
 ];
 
+const approximateNavHeight = 112;
 const randomNumber = () => Math.floor(Math.random() * 3) + 1;
 const randomWidth = () => desktopWidths[randomNumber()];
+const storyHeight = 94;
 
 const Story = () => (
   <div className="max-w-4xl mx-auto animate-pulse">
@@ -25,15 +29,19 @@ const Story = () => (
   </div>
 );
 
-const storyHeight = 110;
-const stories = Math.round(1000 / storyHeight);
+const Loading = () => {
+  const [storyCount, setStoryCount] = useState(Math.round(1000 / storyHeight));
 
-const Loading = () => (
-  <>
-    {[...Array(stories).keys()].map(index => (
-      <Story key={index} />
-    ))}
-  </>
-);
+  useEffect(() => {
+    setStoryCount(Math.round((window.innerHeight - approximateNavHeight) / storyHeight));
+  }, []);
 
+  return (
+    <>
+      {[...Array(storyCount).keys()].map(index => (
+        <Story key={index} />
+      ))}
+    </>
+  );
+};
 export { Loading };

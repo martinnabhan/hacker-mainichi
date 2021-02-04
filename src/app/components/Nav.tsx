@@ -29,7 +29,7 @@ const Nav = () => {
     return (
       <Link href={day === '今日' ? '/' : `/${date}`} key={date}>
         <a
-          className={`${buttonClasses} text-subtitle hover:bg-title hover:text-white`}
+          className={`${buttonClasses} text-subtitle hover-hover:hover:bg-title hover-hover:hover:text-white`}
           onClick={() => dispatch(dayChanged({ date, day }))}
         >
           {day}

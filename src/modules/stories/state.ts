@@ -1,5 +1,4 @@
 import {
-  createAsyncThunk,
   createEntityAdapter,
   createSlice,
   EntityAdapter,
@@ -10,25 +9,17 @@ import {
 } from '@reduxjs/toolkit';
 import { State } from '../../app/reducer';
 import { dates, todayDate } from '../days';
+import { fetchTopStories } from './api';
 
-interface BaseStory {
+export interface BaseStory {
   id: EntityId;
   by: string;
   score: number;
   title: string;
 }
 
-interface APIStory extends BaseStory {
-  descendants: number;
-  type: 'story';
-}
-
-interface DBStory extends BaseStory {
+export interface Story extends BaseStory {
   comments: number;
-}
-
-export interface Story extends DBStory {
-  visited: boolean;
 }
 
 type RequestStatus = 'fulfilled' | 'idle' | 'pending' | 'rejected';
@@ -62,31 +53,6 @@ const initialState: { [key: string]: typeof stories[string] } & { topStories: ty
   ),
 };
 
-const baseUrl = 'https://hacker-news.firebaseio.com/v0';
-
-const isVisited = (id: EntityId) => Boolean(localStorage.getItem(id.toString()));
-
-const fetchTopStories = createAsyncThunk('stories/fetchTopStories', async () => {
-  const response = await fetch(`${baseUrl}/topstories.json`);
-  const topStoryIds: number[] = await response.json();
-
-  const responses = await Promise.all(topStoryIds.slice(0, 100).map(id => fetch(`${baseUrl}/item/${id}.json`)));
-  const apiStories: (APIStory | null)[] = await Promise.all(responses.map(response => response.json()));
-
-  const stories = apiStories
-    .filter((apiStory): apiStory is APIStory => apiStory !== null && apiStory.type === 'story')
-    .map(({ id, by, descendants, score, title }) => ({
-      id,
-      by,
-      comments: descendants,
-      score,
-      title,
-      visited: isVisited(id),
-    }));
-
-  return { date: todayDate, stories };
-});
-
 const { actions, reducer } = createSlice({
   extraReducers: builder => {
     builder.addCase(fetchTopStories.fulfilled, (state, { meta, payload }) => {
@@ -107,13 +73,7 @@ const { actions, reducer } = createSlice({
   initialState,
   name: 'stories',
   reducers: {
-    storyVisited: (state, { payload }: PayloadAction<{ date: string; id: Story['id'] }>) => {
-      if (payload.date === todayDate) {
-        topStoriesAdapter.updateOne(state.topStories, { id: payload.id, changes: { visited: true } });
-      } else {
-        dateAdapters[payload.date].updateOne(state[payload.date], { id: payload.id, changes: { visited: true } });
-      }
-
+    storyVisited: (_, { payload }: PayloadAction<{ date: string; id: Story['id'] }>) => {
       localStorage.setItem(payload.id.toString(), payload.id.toString());
     },
   },
@@ -141,4 +101,4 @@ const selectIds = ({ date }: { date: string }) => {
 
 const selectStatus = (state: State) => state.stories.topStories.status;
 
-export { fetchTopStories, storyVisited, reducer, selectById, selectError, selectIds, selectStatus, topStories };
+export { storyVisited, reducer, selectById, selectError, selectIds, selectStatus, topStories };
