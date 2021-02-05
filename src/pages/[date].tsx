@@ -73,7 +73,7 @@ const getStaticProps: GetStaticProps<{ initialState: State }> = async ({ params 
       initialState: {
         days: {
           date,
-          day: date === todayDate ? '今日' : getDayFromDate(date),
+          day: date === todayDate ? '今' : getDayFromDate(date),
         },
         stories: {
           topStories,

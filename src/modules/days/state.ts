@@ -3,7 +3,7 @@ import { format, subDays } from 'date-fns';
 import { State } from '../../app/reducer';
 
 type Day = '月' | '火' | '水' | '木' | '金' | '土' | '日';
-type Today = '今日';
+type Now = '今';
 
 const dateFormat = 'yyyyMMdd';
 const days: Day[] = ['月', '火', '水', '木', '金', '土', '日'];
@@ -18,7 +18,7 @@ const yesterday = subDays(today, 1);
 const yesterdayDay = days[yesterday.getDay() - 1];
 const yesterdayReverseIndex = daysReverse.indexOf(yesterdayDay);
 
-const sortedDays: Parameters<typeof dayChanged>[0]['day'][] = [
+const sortedDays: Exclude<Parameters<typeof dayChanged>[0]['day'], '今'>[] = [
   ...daysReverse.slice(yesterdayReverseIndex),
   ...daysReverse.slice(0, yesterdayReverseIndex),
 ];
@@ -28,14 +28,14 @@ const getDayFromDate = (date: string) => sortedDays[dates.indexOf(date)];
 
 const initialState = {
   date: todayDate,
-  day: '今日' as Day | Today,
+  day: '今' as Day | Now,
 };
 
 const { actions, reducer } = createSlice({
   name: 'days',
   initialState,
   reducers: {
-    dayChanged: (state, { payload }: PayloadAction<{ date: string; day: Day | Today }>) => {
+    dayChanged: (state, { payload }: PayloadAction<{ date: string; day: Day | Now }>) => {
       state.date = payload.date;
       state.day = payload.day;
     },
