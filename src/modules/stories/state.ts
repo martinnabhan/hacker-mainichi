@@ -101,4 +101,4 @@ const selectIds = ({ date }: { date: string }) => {
 
 const selectStatus = (state: State) => state.stories.topStories.status;
 
-export { storyVisited, reducer, selectById, selectError, selectIds, selectStatus, topStories };
+export { initialState, storyVisited, reducer, selectById, selectError, selectIds, selectStatus, topStories };

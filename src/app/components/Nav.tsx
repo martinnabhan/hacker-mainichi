@@ -1,14 +1,17 @@
-import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { dayChanged, getDateFromDay, selectDate, sortedDays, todayDate } from '../../modules/days';
+import { dayChanged, getDateFromDay, selectDate, sortedDays } from '../../modules/days';
+import { NowButton } from './NowButton';
 
-const buttonClasses = 'px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium';
+export const classes = {
+  base: 'px-2 sm:px-3 py-1.5 sm:py-2 rounded-md text-sm font-medium',
+  active: 'bg-primary text-white cursor-default',
+  inactive: 'text-subtitle hover-hover:hover:bg-title hover-hover:hover:text-white',
+};
 
-const sortedDaysWithToday: Parameters<typeof dayChanged>[0]['day'][] = ['今日', ...sortedDays];
-
-const links = sortedDaysWithToday.map(day => ({
-  date: day === '今日' ? todayDate : getDateFromDay(day),
+const links = sortedDays.map(day => ({
+  date: getDateFromDay(day),
   day,
 }));
 
@@ -20,18 +23,15 @@ const Nav = () => {
   const buttons = links.map(({ date, day }) => {
     if (router.route !== '/404' && date === currentDate) {
       return (
-        <a className={`${buttonClasses} bg-primary text-white cursor-default`} key={date}>
+        <a className={`${classes.base} ${classes.active}`} key={date}>
           {day}
         </a>
       );
     }
 
     return (
-      <Link href={day === '今日' ? '/' : `/${date}`} key={date}>
-        <a
-          className={`${buttonClasses} text-subtitle hover-hover:hover:bg-title hover-hover:hover:text-white`}
-          onClick={() => dispatch(dayChanged({ date, day }))}
-        >
+      <Link href={`/${date}`} key={date}>
+        <a className={`${classes.base} ${classes.inactive}`} onClick={() => dispatch(dayChanged({ date, day }))}>
           {day}
         </a>
       </Link>
@@ -47,7 +47,10 @@ const Nav = () => {
           </div>
 
           <div className="md:block">
-            <div className="flex items-baseline space-x-2 sm:space-x-4 pb-4 sm:pb-0">{buttons}</div>
+            <div className="flex items-baseline divide-x pb-4 sm:pb-0">
+              <NowButton currentDate={currentDate} />
+              <div className="flex pl-2 sm:pl-4 space-x-2 sm:space-x-4">{buttons}</div>
+            </div>
           </div>
         </div>
       </div>
