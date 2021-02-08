@@ -6,7 +6,7 @@ interface Props {
 
 const NotFound: FunctionComponent<Props> = ({ message }) => (
   <div className="flex justify-center items-center h-full flex-col">
-    <p className="text-title text-2xl sm:text-5xl -mt-48 sm:-mt-16">{message || '404'}</p>
+    <p className="text-title dark:text-subtitle-dark text-2xl sm:text-5xl -mt-48 sm:-mt-16">{message || '404'}</p>
   </div>
 );
 

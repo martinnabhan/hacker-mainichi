@@ -44,10 +44,14 @@ const Story: FunctionComponent<Props> = ({ id }) => {
       rel="noopener noreferrer"
       target="_blank"
     >
-      <div className={`${visited ? 'opacity-60' : 'shadow-sm'} p-4 mb-4 rounded-md bg-white border border-borderColor`}>
-        <p className="font-bold text-title">{title}</p>
+      <div
+        className={`${
+          visited ? 'opacity-60 dark:opacity-40' : 'shadow-sm'
+        } p-4 mb-4 rounded-md bg-white dark:bg-secondary-dark border border-border-color dark:border-border-color-dark`}
+      >
+        <p className="font-bold text-title dark:text-title-dark">{title}</p>
 
-        <div className="text-sm text-subtitle">
+        <div className="text-sm text-subtitle dark:text-subtitle-dark">
           <span>{score} ポイント・</span>
           <span>{comments} コメント</span>
         </div>

@@ -18,12 +18,12 @@ const storyHeight = 94;
 
 const Story = () => (
   <div className="max-w-4xl mx-auto animate-pulse">
-    <div className="shadow-sm p-4 mb-4 rounded-md bg-white border border-borderColor">
-      <div className={`rounded bg-gray-300 h-4 w-full ${randomWidth()} mb-0.5 mt-1`} />
+    <div className="shadow-sm p-4 mb-4 rounded-md bg-white dark:bg-secondary-dark border border-border-color dark:border-border-color-dark">
+      <div className={`rounded bg-gray-300 dark:bg-gray-600 h-4 w-full ${randomWidth()} mb-0.5 mt-1`} />
 
       <div>
-        <div className="rounded bg-gray-200 h-3 w-16 inline-block mr-4" />
-        <div className="rounded bg-gray-200 h-3 w-16 inline-block" />
+        <div className="rounded bg-gray-200 dark:bg-gray-500 h-3 w-16 inline-block mr-4" />
+        <div className="rounded bg-gray-200 dark:bg-gray-500 h-3 w-16 inline-block" />
       </div>
     </div>
   </div>

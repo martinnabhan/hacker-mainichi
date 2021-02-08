@@ -1,10 +1,24 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+import Head from 'next/head';
 import { State } from '../app/reducer';
-import { dates, getDayFromDate, todayDate } from '../modules/days';
+import { dates, getDayFromDate, selectDay, todayDate } from '../modules/days';
 import { Stories, Story, topStories } from '../modules/stories';
 import { DynamoDB } from 'aws-sdk';
+import { useSelector } from 'react-redux';
 
-const Date = () => <Stories />;
+const Date = () => {
+  const day = useSelector(selectDay);
+
+  return (
+    <>
+      <Head>
+        <title>ハッカー毎日 | {day}曜日</title>
+      </Head>
+
+      <Stories />
+    </>
+  );
+};
 
 const fetchStories = async (date: string) => {
   const client = new DynamoDB.DocumentClient({
