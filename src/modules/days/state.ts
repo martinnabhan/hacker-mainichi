@@ -29,6 +29,7 @@ const getDayFromDate = (date: string) => sortedDays[dates.indexOf(date)];
 const initialState = {
   date: todayDate,
   day: '今' as Day | Now,
+  x: 0,
 };
 
 const { actions, reducer } = createSlice({
@@ -38,14 +39,19 @@ const { actions, reducer } = createSlice({
     dayChanged: (state, { payload }: PayloadAction<{ date: string; day: Day | Now }>) => {
       state.date = payload.date;
       state.day = payload.day;
+      state.x = 0;
+    },
+    xChanged: (state, { payload }: PayloadAction<{ x: number }>) => {
+      state.x = payload.x;
     },
   },
 });
 
-const { dayChanged } = actions;
+const { dayChanged, xChanged } = actions;
 
 const selectDate = (state: State) => state.days.date;
 const selectDay = (state: State) => state.days.day;
+const selectX = (state: State) => state.days.x;
 
 export {
   dayChanged,
@@ -57,7 +63,9 @@ export {
   reducer,
   selectDate,
   selectDay,
+  selectX,
   sortedDays,
   todayDate,
+  xChanged,
   yesterdayDay,
 };

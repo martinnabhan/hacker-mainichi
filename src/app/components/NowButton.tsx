@@ -1,23 +1,19 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
-import { dayChanged, todayDate } from '../../modules/days';
+import { useDispatch, useSelector } from 'react-redux';
+import { dayChanged, selectDate, todayDate } from '../../modules/days';
 import { classes } from './Nav';
 
-interface Props {
-  currentDate: string;
-}
-
-const NowButton: FunctionComponent<Props> = ({ currentDate }) => {
+const NowButton = () => {
+  const date = useSelector(selectDate);
   const dispatch = useDispatch();
   const router = useRouter();
 
-  if (router.route !== '/404' && currentDate === todayDate) {
+  if (router.route !== '/404' && date === todayDate) {
     return (
-      <a className={`${classes.base} ${classes.active} mr-2 sm:mr-4`} key="今">
+      <p className={`${classes.base} ${classes.active} mr-2 sm:mr-4`} key="今">
         今
-      </a>
+      </p>
     );
   }
 
