@@ -25,7 +25,7 @@
   "license": "MIT",
   "name": "hacker-mainichi-client",
   "scripts": {
-    "build": "next build && next export -o dist",
+    "build": "TZ=Asia/Tokyo next build && next export -o dist",
     "dev": "next dev",
     "fix": "prettier --write . && tsc --noEmit",
     "fix:ci": "prettier --check . && tsc --noEmit",

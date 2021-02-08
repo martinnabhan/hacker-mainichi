@@ -1,7 +1,7 @@
 const isProduction = process.env['npm_lifecycle_event'] === 'build';
 
 module.exports = {
-  darkMode: false,
+  darkMode: 'media',
   purge: {
     content: ['./src/**/*.tsx'],
     enabled: isProduction,
@@ -24,15 +24,24 @@ module.exports = {
     extend: {
       colors: {
         body: '#fafafa',
-        borderColor: '#f0f0f0',
+        'body-dark': '#18191a',
+        'border-color': '#f0f0f0',
+        'border-color-dark': '#3e3e3f',
+        'secondary-dark': '#252526',
         primary: '#506bf0',
         subtitle: '#8a94a6',
+        'subtitle-dark': '#9c9ea2',
         title: '#333333',
-        visited: '#00d183',
+        'title-dark': '#e7e8ed',
       },
       screens: {
         'hover-hover': { raw: '(hover: hover)' },
       },
+    },
+  },
+  variants: {
+    extend: {
+      opacity: ['dark'],
     },
   },
 };

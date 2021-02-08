@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectDate, todayDate } from '../../days';
 import { Story } from './Story';
 import { selectIds, selectStatus } from '../state';
-import { Error, Loading } from '../../../app';
+import { Loading } from '../../../app';
 import NotFound from '../../../pages/404';
 import { fetchTopStories } from '../api';
 
@@ -24,7 +24,7 @@ const Stories = () => {
   }
 
   if (status === 'rejected') {
-    return <Error />;
+    return <NotFound message="エラーが発生しました。" />;
   }
 
   if ((date !== todayDate || status === 'fulfilled') && storyIds.length === 0) {

@@ -1,6 +1,6 @@
 ---
-name: Template
-about: Issue を追加する際にご利用ください。
+name: テンプレート
+about: 日本語の方はご利用ください。
 title: ''
 labels: ''
 assignees: ''
