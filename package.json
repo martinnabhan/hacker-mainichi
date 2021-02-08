@@ -10,6 +10,7 @@
     "aws-sdk": "^2.836.0",
     "date-fns": "^2.16.1",
     "env-var": "^7.0.0",
+    "framer-motion": "^3.3.0",
     "next": "^10.0.6",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
@@ -24,6 +25,7 @@
   "description": "１日単位で見れるHacker News",
   "license": "MIT",
   "name": "hacker-mainichi-client",
+  "repository": "https://github.com/martinnabhan/hacker-mainichi-client",
   "scripts": {
     "build": "TZ=Asia/Tokyo next build && next export -o dist",
     "dev": "next dev",

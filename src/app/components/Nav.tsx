@@ -24,9 +24,9 @@ const Nav = () => {
   const buttons = links.map(({ date, day }) => {
     if (router.route !== '/404' && date === currentDate) {
       return (
-        <a className={`${classes.base} ${classes.active}`} key={date}>
+        <p className={`${classes.base} ${classes.active}`} key={date}>
           {day}
-        </a>
+        </p>
       );
     }
 
@@ -44,14 +44,12 @@ const Nav = () => {
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         <div className="flex flex-col sm:flex-row items-center justify-between h-24 sm:h-16">
           <div className="flex items-center py-2 sm:py-0">
-            <a className="flex items-center" href="/">
-              <img alt="ハッカー毎日" height="42" src="/logo.svg" width="155" />
-            </a>
+            <img alt="ハッカー毎日" height="42" src="/logo.svg" width="155" />
           </div>
 
           <div className="md:block">
             <div className="flex items-baseline divide-x pb-4 sm:pb-0">
-              <NowButton currentDate={currentDate} />
+              <NowButton />
               <div className="flex pl-2 sm:pl-4 space-x-2 sm:space-x-4 dark:border-border-color-dark">{buttons}</div>
             </div>
           </div>

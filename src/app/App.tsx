@@ -14,7 +14,7 @@ const App: FunctionComponent<Props> = ({ children, store }) => (
       <Nav />
 
       <main className="flex flex-grow h-full">
-        <div className="flex-grow max-w-7xl mx-auto py-8 sm:py-12 px-4 sm:px-6">{children}</div>
+        <div className="flex-grow max-w-7xl mx-auto py-8 sm:py-12 px-4 sm:px-6 overflow-x-hidden">{children}</div>
       </main>
     </div>
   </Provider>

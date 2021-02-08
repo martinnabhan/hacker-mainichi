@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { State } from '../app/reducer';
-import { dates, getDayFromDate, selectDay, todayDate } from '../modules/days';
+import { dates, getDayFromDate, initialState as days, selectDay, todayDate } from '../modules/days';
 import { Stories, Story, topStories } from '../modules/stories';
 import { DynamoDB } from 'aws-sdk';
 import { useSelector } from 'react-redux';
@@ -86,6 +86,7 @@ const getStaticProps: GetStaticProps<{ initialState: State }> = async ({ params 
     props: {
       initialState: {
         days: {
+          ...days,
           date,
           day: date === todayDate ? '今' : getDayFromDate(date),
         },
