@@ -43,7 +43,7 @@ const Draggable: FunctionComponent = ({ children }) => {
       dragTransition={{ bounceStiffness: 400, bounceDamping: 30 }}
       initial={{ x }}
       key={date}
-      onDragEnd={(_, { offset }) => Math.abs(offset.x) > width / 2 && paginate(offset.x < 0 ? 'left' : 'right')}
+      onDragEnd={(_, { offset }) => Math.abs(offset.x) > width * 0.75 && paginate(offset.x < 0 ? 'left' : 'right')}
     >
       {children}
     </motion.div>
