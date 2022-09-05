@@ -1,0 +1,3 @@
+query visited($date: NonEmptyString!) {
+  visited(date: $date)
+}

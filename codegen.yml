@@ -1,0 +1,18 @@
+generates:
+  types/graphql/index.ts:
+    config:
+      avoidOptionals: true
+      scalars:
+        NonEmptyString: string
+        PositiveInt: number
+      useTypeImports: true
+    documents:
+      - '**/*.graphql'
+    plugins:
+      - typed-document-node
+      - typescript
+      - typescript-operations:
+          nonOptionalTypename: true
+      - typescript-resolvers
+    schema:
+      - graphql/schema.ts
