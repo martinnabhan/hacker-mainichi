@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 interface Props {
-  message?: string;
+  message: string;
 }
 
 const FullScreenMessage: FunctionComponent<Props> = ({ message }) => (

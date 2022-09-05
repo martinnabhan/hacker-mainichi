@@ -1,38 +1,17 @@
-import { EntityId } from '@reduxjs/toolkit';
 import { FunctionComponent, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { State } from '../../../app/reducer';
-import { selectDate } from '../../days';
-import { selectById, Story as IStory, storyVisited } from '../state';
 
-interface Props {
-  id: IStory['id'];
-}
+type Props = Story;
 
-const isVisited = (id: EntityId) => Boolean(localStorage.getItem(id.toString()));
-
-const Story: FunctionComponent<Props> = ({ id }) => {
-  const dispatch = useDispatch();
-  const date = useSelector(selectDate);
-  const story = useSelector((state: State) => selectById({ date })(state, id));
-
+const Story: FunctionComponent<Props> = ({ comments, id, score, title }) => {
   const [visited, setVisited] = useState(false);
 
   useEffect(() => {
-    if (story && !visited) {
-      setVisited(isVisited(story.id));
-    }
-  }, []);
-
-  if (!story) {
-    return null;
-  }
-
-  const { comments, score, title } = story;
+    setVisited(Boolean(localStorage.getItem(id.toString())));
+  }, [id]);
 
   const handleClick = () => {
     if (!visited) {
-      dispatch(storyVisited({ date, id }));
+      localStorage.setItem(id.toString(), id.toString());
       setVisited(true);
     }
   };

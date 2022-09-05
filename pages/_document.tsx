@@ -15,10 +15,11 @@ class MyDocument extends Document {
 
           <meta name="description" content="１日単位で見れる Hacker News" />
           <meta name="msapplication-TileColor" content="#2b5797" />
-          <meta name="theme-color" content="#ffffff" />
+          <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+          <meta name="theme-color" content="#242526" media="(prefers-color-scheme: dark)" />
         </Head>
 
-        <body className="bg-body dark:bg-body-dark">
+        <body className="bg-[#fafafa] dark:bg-[#242526]">
           <Main />
           <NextScript />
         </body>
