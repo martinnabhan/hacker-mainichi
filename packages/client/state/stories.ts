@@ -1,5 +1,6 @@
+/* eslint-disable no-param-reassign */
 import { createEntityAdapter, createSlice, EntityAdapter, EntityState, PayloadAction } from '@reduxjs/toolkit';
-import { State } from '@hacker-mainichi/client/state/reducer';
+import type { State } from '@hacker-mainichi/client/state/reducer';
 import { dates } from '@hacker-mainichi/client/lib/dates';
 import { today } from '@hacker-mainichi/client/lib/today';
 import { fetchTopStories } from '@hacker-mainichi/client/thunks/fetchTopStories';

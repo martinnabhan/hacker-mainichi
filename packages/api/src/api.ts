@@ -45,6 +45,7 @@ class API extends Stack {
 
 const app = new App();
 
+// eslint-disable-next-line no-new
 new API(app, 'HackerMainichiAPI');
 
 app.synth();

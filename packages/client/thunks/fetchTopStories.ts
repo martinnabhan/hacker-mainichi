@@ -14,7 +14,7 @@ const fetchTopStories = createAsyncThunk('stories/fetchTopStories', async (_, { 
   const topStoryIds: number[] = await response.json();
 
   const responses = await Promise.all(topStoryIds.slice(0, 100).map(id => fetch(`${baseUrl}/item/${id}.json`)));
-  const apiStories: (ApiStory | null)[] = await Promise.all(responses.map(response => response.json()));
+  const apiStories: (ApiStory | null)[] = await Promise.all(responses.map(apiStoryResponse => apiStoryResponse.json()));
 
   const stories = apiStories
     .filter((apiStory): apiStory is ApiStory => apiStory !== null && apiStory.type === 'story')

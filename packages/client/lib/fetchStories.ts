@@ -24,7 +24,7 @@ const fetchStories = async (date: string) => {
     })
     .promise();
 
-  return (result.Items as Story[]).filter(({ score }) => score >= 10);
+  return (result.Items as Story[]).filter(({ score }) => score >= 10).sort((a, b) => b.score - a.score);
 };
 
 export { fetchStories };

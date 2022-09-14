@@ -1,5 +1,4 @@
-import parse from 'date-fns/parse';
-import subDays from 'date-fns/subDays';
+import { parse, subDays } from 'date-fns';
 import { today } from '@hacker-mainichi/client/lib/today';
 import { getFormattedDate } from '@hacker-mainichi/client/lib/getFormattedDate';
 import { dateFormat } from '@hacker-mainichi/client/lib/dateFormat';

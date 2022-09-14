@@ -16,19 +16,6 @@ const randomNumber = () => Math.floor(Math.random() * 3) + 1;
 const randomWidth = () => desktopWidths[randomNumber()];
 const storyHeight = 94;
 
-const Story = () => (
-  <div className="max-w-4xl mx-auto animate-pulse">
-    <div className="shadow-sm p-4 mb-4 rounded-md bg-white dark:bg-secondary-dark border border-border-color dark:border-border-color-dark">
-      <div className={`rounded bg-gray-300 dark:bg-gray-600 h-4 w-full ${randomWidth()} mb-0.5 mt-1`} />
-
-      <div>
-        <div className="rounded bg-gray-200 dark:bg-gray-500 h-3 w-16 inline-block mr-4" />
-        <div className="rounded bg-gray-200 dark:bg-gray-500 h-3 w-16 inline-block" />
-      </div>
-    </div>
-  </div>
-);
-
 const Loading = () => {
   const [storyCount, setStoryCount] = useState(Math.round(1000 / storyHeight));
 
@@ -39,7 +26,16 @@ const Loading = () => {
   return (
     <>
       {[...Array(storyCount).keys()].map(index => (
-        <Story key={index} />
+        <div key={index} className="mx-auto max-w-4xl animate-pulse">
+          <div className="mb-4 rounded-md border border-border-color bg-white p-4 shadow-sm dark:border-border-color-dark dark:bg-secondary-dark">
+            <div className={`h-4 w-full rounded bg-gray-300 dark:bg-gray-600 ${randomWidth()} mb-0.5 mt-1`} />
+
+            <div>
+              <div className="mr-4 inline-block h-3 w-16 rounded bg-gray-200 dark:bg-gray-500" />
+              <div className="inline-block h-3 w-16 rounded bg-gray-200 dark:bg-gray-500" />
+            </div>
+          </div>
+        </div>
       ))}
     </>
   );
