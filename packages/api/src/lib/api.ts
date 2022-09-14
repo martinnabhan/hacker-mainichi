@@ -1,8 +1,6 @@
+/* eslint-disable no-console */
 import retry from 'async-retry';
-import endOfDay from 'date-fns/endOfDay';
-import getUnixTime from 'date-fns/getUnixTime';
-import parse from 'date-fns/parse';
-import startOfDay from 'date-fns/startOfDay';
+import { endOfDay, getUnixTime, parse, startOfDay } from 'date-fns';
 import fetch from 'node-fetch';
 
 interface GenericItem {
@@ -13,9 +11,9 @@ interface GenericItem {
 }
 
 interface Story extends GenericItem {
-  id: number;
   by: string;
   descendants: number;
+  id: number;
   score: number;
   time: number;
   title: string;
@@ -26,7 +24,7 @@ interface Story extends GenericItem {
 type Item = GenericItem | Story;
 
 const BASE_URL = 'https://hacker-news.firebaseio.com';
-const chunkSize = 100;
+const CHUNK_SIZE = 100;
 
 const getMaxItemId = async () => {
   const response = await fetch(`${BASE_URL}/v0/maxitem.json`);
@@ -35,16 +33,14 @@ const getMaxItemId = async () => {
   return maxItemId;
 };
 
-const getItemIds = ({ startId, chunkSize }: { startId: number; chunkSize: number }) => {
+const getItemIds = ({ startId, chunkSize }: { chunkSize: number; startId: number }) => {
   let itemId = startId + 1;
 
-  const itemIds = [...Array(chunkSize)].reduce<number[]>(itemIds => {
-    itemId = itemId - 1;
+  return [...Array(chunkSize)].reduce<number[]>(itemIds => {
+    itemId -= 1;
 
     return [...itemIds, itemId];
   }, []);
-
-  return itemIds;
 };
 
 const getItems = async ({ itemIds }: { itemIds: number[] }) => {
@@ -61,7 +57,7 @@ const getItems = async ({ itemIds }: { itemIds: number[] }) => {
   return items;
 };
 
-const getStories = ({ items, start, end }: { items: Item[]; start: number; end: number }) =>
+const getStories = ({ items, start, end }: { end: number; items: Item[]; start: number }) =>
   items.filter(
     (item): item is Story =>
       item && item.type === 'story' && !item.dead && !item.deleted && item.time >= start && item.time <= end,
@@ -76,15 +72,17 @@ const api = {
     let apiStories: Story[] = [];
     let startId = await getMaxItemId();
 
+    // eslint-disable-next-line no-constant-condition
     while (true) {
       console.log(`Fetching items ${startId} to ${startId - 100}...`);
 
-      const itemIds = getItemIds({ startId, chunkSize });
+      const itemIds = getItemIds({ startId, chunkSize: CHUNK_SIZE });
+      // eslint-disable-next-line no-await-in-loop
       const items = await getItems({ itemIds });
       const stories = getStories({ items, start, end });
 
       apiStories = [...apiStories, ...stories];
-      startId = startId - 100;
+      startId -= 100;
 
       if (items[items.length - 1].time < start) {
         break;

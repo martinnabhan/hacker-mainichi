@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import 'tailwindcss/tailwind.css';
@@ -30,11 +31,11 @@ const App = ({ Component, pageProps }: AppProps) => {
         <title>ハッカー毎日</title>
       </Head>
 
-      <div className="min-h-screen flex flex-col">
+      <div className="flex min-h-screen flex-col">
         <Nav />
 
-        <main className="flex flex-grow h-full bg-[#18191a]">
-          <div className="flex-grow max-w-7xl mx-auto py-8 sm:py-12 px-4 sm:px-6">
+        <main className="flex h-full grow bg-[#18191a]">
+          <div className="mx-auto max-w-7xl grow py-8 px-4 sm:py-12 sm:px-6">
             <Provider store={store}>
               <Component {...pageProps} />
             </Provider>

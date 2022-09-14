@@ -1,3 +1,4 @@
+/* eslint-disable import/no-duplicates */
 import parse from 'date-fns/parse';
 import format from 'date-fns-tz/format';
 import ja from 'date-fns/locale/ja';

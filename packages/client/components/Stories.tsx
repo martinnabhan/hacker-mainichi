@@ -16,7 +16,7 @@ const Stories: FunctionComponent<Props> = ({ date }) => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="mx-auto max-w-4xl">
       {storyIds.map(id => (
         <Story key={id} date={date} id={Number(id)} />
       ))}

@@ -31,7 +31,7 @@ const Story: FunctionComponent<Props> = ({ date, id }) => {
       <div
         className={`${
           visited ? 'opacity-60 dark:opacity-40' : 'shadow-sm'
-        } p-4 mb-4 rounded-md bg-white dark:bg-secondary-dark border border-border-color dark:border-border-color-dark`}
+        } mb-4 rounded-md border border-border-color bg-white p-4 dark:border-border-color-dark dark:bg-secondary-dark`}
       >
         <p className="font-bold text-title dark:text-title-dark">{title}</p>
 

@@ -1,10 +1,11 @@
+/* eslint-disable no-console */
 import { DynamoDB } from 'aws-sdk';
 import { isDevelopment, TableName } from '../settings';
 
 interface Story {
-  id: number;
   by: string;
   comments: number;
+  id: number;
   score: number;
   title: string;
 }
@@ -57,11 +58,11 @@ const db = {
     }
 
     await Promise.all(
-      storyChunks.map(async stories =>
+      storyChunks.map(async chunkStories =>
         client
           .batchWrite({
             RequestItems: {
-              [TableName]: stories.map(Item => ({
+              [TableName]: chunkStories.map(Item => ({
                 PutRequest: {
                   Item,
                 },

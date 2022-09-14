@@ -1,5 +1,4 @@
-import format from 'date-fns/format';
-import startOfYesterday from 'date-fns/startOfYesterday';
+import { format, startOfYesterday } from 'date-fns';
 import { api, db, vercel } from './lib';
 import { DATE } from './settings';
 

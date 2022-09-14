@@ -1,0 +1,6 @@
+projects:
+  client:
+    documents:
+      - packages/client/**/*.graphql
+    schema:
+      - packages/client/graphql/schema.ts
