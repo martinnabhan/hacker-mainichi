@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { client } from '@hacker-mainichi/graphql/client';
-import { VisitDocument } from '@hacker-mainichi/types/graphql';
+import { client } from '@hacker-mainichi/client/graphql/client';
+import { VisitDocument } from '@hacker-mainichi/client/types/graphql';
 
 const visitStory = createAsyncThunk('stories/visitStory', async ({ date, id }: { date: string; id: number }) => {
   await client.mutate({ mutation: VisitDocument, variables: { date, ids: [id] } });

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchVisitedStories } from '@hacker-mainichi/thunks/fetchVisitedStories';
-import { today } from '@hacker-mainichi/lib/today';
+import { fetchVisitedStories } from '@hacker-mainichi/client/thunks/fetchVisitedStories';
+import { today } from '@hacker-mainichi/client/lib/today';
 
 const baseUrl = 'https://hacker-news.firebaseio.com/v0';
 

@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "bootstrap": "cdk bootstrap",
+    "build": "rm -rf dist/* && esbuild src/api.saveStories.ts --bundle --outfile=dist/saveStories.js --platform=node --sourcemap --target=node12.19.0",
+    "check:tsc": "tsc --noEmit",
+    "deploy": "cdk deploy HackerMainichiAPI",
+    "dev": "NODE_ENV=development NODE_OPTIONS=--enable-source-maps TZ=Asia/Tokyo nodemon --ext ts --watch src --exec \"npm run build && run-func dist/saveStories.js handler\"",
+    "diff": "cdk diff HackerMainichiAPI",
+    "dynamodb": "concurrently dynamodb-admin dynamodb-local"
+  },
+  "version": "1.0.0"
+}

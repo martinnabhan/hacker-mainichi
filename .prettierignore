@@ -1,5 +1,8 @@
 .next/
+cdk.out/
 dist/
+
+packages/client/types/graphql/index.ts
 
 package-lock.json
 tsconfig.buildinfo

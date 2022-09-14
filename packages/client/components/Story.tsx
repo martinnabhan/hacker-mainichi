@@ -1,9 +1,9 @@
-import { selectById, selectVisited } from '@hacker-mainichi/state/stories';
-import { State } from '@hacker-mainichi/state/reducer';
+import { selectById, selectVisited } from '@hacker-mainichi/client/state/stories';
+import { State } from '@hacker-mainichi/client/state/reducer';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
-import { visitStory } from '@hacker-mainichi/thunks/visitStory';
-import { useDispatch } from '@hacker-mainichi/hooks/useDispatch';
+import { visitStory } from '@hacker-mainichi/client/thunks/visitStory';
+import { useDispatch } from '@hacker-mainichi/client/hooks/useDispatch';
 
 interface Props {
   date: string;
@@ -29,8 +29,9 @@ const Story: FunctionComponent<Props> = ({ date, id }) => {
       target="_blank"
     >
       <div
-        className={`${visited ? 'opacity-60 dark:opacity-40' : 'shadow-sm'
-          } p-4 mb-4 rounded-md bg-white dark:bg-secondary-dark border border-border-color dark:border-border-color-dark`}
+        className={`${
+          visited ? 'opacity-60 dark:opacity-40' : 'shadow-sm'
+        } p-4 mb-4 rounded-md bg-white dark:bg-secondary-dark border border-border-color dark:border-border-color-dark`}
       >
         <p className="font-bold text-title dark:text-title-dark">{title}</p>
 

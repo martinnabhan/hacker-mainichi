@@ -1,7 +1,7 @@
-import { Story } from '@hacker-mainichi/components/Story';
-import { FullScreenMessage } from '@hacker-mainichi/components/FullScreenMessage';
+import { Story } from '@hacker-mainichi/client/components/Story';
+import { FullScreenMessage } from '@hacker-mainichi/client/components/FullScreenMessage';
 import { useSelector } from 'react-redux';
-import { selectIds } from '@hacker-mainichi/state/stories';
+import { selectIds } from '@hacker-mainichi/client/state/stories';
 import { FunctionComponent } from 'react';
 
 interface Props {

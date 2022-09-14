@@ -1,10 +1,10 @@
 import { createEntityAdapter, createSlice, EntityAdapter, EntityState, PayloadAction } from '@reduxjs/toolkit';
-import { State } from '@hacker-mainichi/state/reducer';
-import { dates } from '@hacker-mainichi/lib/dates';
-import { today } from '@hacker-mainichi/lib/today';
-import { fetchTopStories } from '@hacker-mainichi/thunks/fetchTopStories';
-import { visitStory } from '@hacker-mainichi/thunks/visitStory';
-import { fetchVisitedStories } from '@hacker-mainichi/thunks/fetchVisitedStories';
+import { State } from '@hacker-mainichi/client/state/reducer';
+import { dates } from '@hacker-mainichi/client/lib/dates';
+import { today } from '@hacker-mainichi/client/lib/today';
+import { fetchTopStories } from '@hacker-mainichi/client/thunks/fetchTopStories';
+import { visitStory } from '@hacker-mainichi/client/thunks/visitStory';
+import { fetchVisitedStories } from '@hacker-mainichi/client/thunks/fetchVisitedStories';
 
 const adapters: { [key: string]: EntityAdapter<Story> } = {};
 

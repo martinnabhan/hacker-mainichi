@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { client } from '@hacker-mainichi/graphql/client';
-import { VisitDocument, VisitedDocument } from '@hacker-mainichi/types/graphql';
+import { client } from '@hacker-mainichi/client/graphql/client';
+import { VisitDocument, VisitedDocument } from '@hacker-mainichi/client/types/graphql';
 
 const fetchVisitedStories = createAsyncThunk('stories/fetchVisitedStories', async ({ date }: { date: string }) => {
   const response = await client.query({ query: VisitedDocument, variables: { date } });

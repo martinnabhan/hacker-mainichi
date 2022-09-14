@@ -1,13 +1,13 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import 'tailwindcss/tailwind.css';
-import { Nav } from '@hacker-mainichi/components/Nav';
+import { Nav } from '@hacker-mainichi/client/components/Nav';
 import { Provider } from 'react-redux';
-import { store } from '@hacker-mainichi/state/store';
+import { store } from '@hacker-mainichi/client/state/store';
 import { useEffect } from 'react';
-import { today } from '@hacker-mainichi/lib/today';
-import { dates } from '@hacker-mainichi/lib/dates';
-import { visitedStoriesReceived } from '@hacker-mainichi/state/stories';
+import { today } from '@hacker-mainichi/client/lib/today';
+import { dates } from '@hacker-mainichi/client/lib/dates';
+import { visitedStoriesReceived } from '@hacker-mainichi/client/state/stories';
 
 const App = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {

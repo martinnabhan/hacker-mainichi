@@ -1,6 +1,11 @@
 .next/
+cdk.out/
 dist/
 node_modules/
 
+packages/client/types/graphql/index.ts
+
+.env
 .env.local
 tsconfig.buildinfo
+

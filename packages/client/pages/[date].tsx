@@ -1,11 +1,11 @@
-import { Stories } from '@hacker-mainichi/components/Stories';
-import { dates } from '@hacker-mainichi/lib/dates';
+import { Stories } from '@hacker-mainichi/client/components/Stories';
+import { dates } from '@hacker-mainichi/client/lib/dates';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import { fetchStories } from '@hacker-mainichi/lib/fetchStories';
+import { fetchStories } from '@hacker-mainichi/client/lib/fetchStories';
 import { useSelector } from 'react-redux';
-import { selectStatus, selectVisitedStatus, storiesReceived } from '@hacker-mainichi/state/stories';
-import { fetchVisitedStories } from '@hacker-mainichi/thunks/fetchVisitedStories';
-import { useDispatch } from '@hacker-mainichi/hooks/useDispatch';
+import { selectStatus, selectVisitedStatus, storiesReceived } from '@hacker-mainichi/client/state/stories';
+import { fetchVisitedStories } from '@hacker-mainichi/client/thunks/fetchVisitedStories';
+import { useDispatch } from '@hacker-mainichi/client/hooks/useDispatch';
 import { useEffect } from 'react';
 
 const Date: NextPage<PageProps> = ({ date, stories }) => {
