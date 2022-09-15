@@ -1,6 +1,6 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchVisitedStories } from '@hacker-mainichi/client/thunks/fetchVisitedStories';
 import { today } from '@hacker-mainichi/client/lib/today';
+import { fetchVisitedStories } from '@hacker-mainichi/client/thunks/fetchVisitedStories';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const baseUrl = 'https://hacker-news.firebaseio.com/v0';
 
@@ -18,9 +18,9 @@ const fetchTopStories = createAsyncThunk('stories/fetchTopStories', async (_, { 
 
   const stories = apiStories
     .filter((apiStory): apiStory is ApiStory => apiStory !== null && apiStory.type === 'story')
-    .map(({ id, descendants, score, title }) => ({
-      id,
+    .map(({ descendants, id, score, title }) => ({
       comments: descendants,
+      id,
       score,
       title,
     }));

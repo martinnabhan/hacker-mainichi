@@ -1,4 +1,7 @@
+import { config } from 'dotenv';
 import env from 'env-var';
+
+config();
 
 env.get('NODE_OPTIONS').required();
 env.get('TZ').required();

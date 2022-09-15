@@ -28,7 +28,7 @@ const CHUNK_SIZE = 100;
 
 const getMaxItemId = async () => {
   const response = await fetch(`${BASE_URL}/v0/maxitem.json`);
-  const maxItemId: number = await response.json();
+  const maxItemId = (await response.json()) as number;
 
   return maxItemId;
 };
@@ -52,7 +52,7 @@ const getItems = async ({ itemIds }: { itemIds: number[] }) => {
     ),
   );
 
-  const items: Item[] = await Promise.all(responses.map(response => response.json()));
+  const items = await Promise.all(responses.map(response => response.json() as Promise<Item>));
 
   return items;
 };
@@ -76,10 +76,10 @@ const api = {
     while (true) {
       console.log(`Fetching items ${startId} to ${startId - 100}...`);
 
-      const itemIds = getItemIds({ startId, chunkSize: CHUNK_SIZE });
+      const itemIds = getItemIds({ chunkSize: CHUNK_SIZE, startId });
       // eslint-disable-next-line no-await-in-loop
       const items = await getItems({ itemIds });
-      const stories = getStories({ items, start, end });
+      const stories = getStories({ end, items, start });
 
       apiStories = [...apiStories, ...stories];
       startId -= 100;
@@ -89,11 +89,11 @@ const api = {
       }
     }
 
-    const stories = apiStories.map(({ id, by, descendants, score, title }) => ({
-      id,
+    const stories = apiStories.map(({ by, descendants, id, score, title }) => ({
       by,
       comments: descendants,
       date,
+      id,
       score,
       title,
     }));

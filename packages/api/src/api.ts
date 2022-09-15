@@ -1,10 +1,11 @@
-import { AttributeType, BillingMode, Table } from '@aws-cdk/aws-dynamodb';
-import { Rule, Schedule } from '@aws-cdk/aws-events';
-import { LambdaFunction } from '@aws-cdk/aws-events-targets';
-import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
-import { RetentionDays } from '@aws-cdk/aws-logs';
-import { App, Duration, RemovalPolicy, Stack } from '@aws-cdk/core';
-import { TableName as tableName, VERCEL_DEPLOY_HOOK_URL } from './settings';
+import { VERCEL_DEPLOY_HOOK_URL, TableName as tableName } from './settings';
+import { App, Duration, RemovalPolicy, Stack } from 'aws-cdk-lib';
+import { AttributeType, BillingMode, Table } from 'aws-cdk-lib/aws-dynamodb';
+import { Rule, Schedule } from 'aws-cdk-lib/aws-events';
+import { LambdaFunction } from 'aws-cdk-lib/aws-events-targets';
+import { Architecture, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
+import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 
 const environment = {
   DYNAMO_DB_TABLE_NAME: tableName,
@@ -18,12 +19,14 @@ class API extends Stack {
     super(scope, id);
 
     const saveStories = new NodejsFunction(this, 'saveStories', {
+      architecture: Architecture.ARM_64,
       bundling: {
         minify: true,
         sourceMap: true,
       },
       environment,
       logRetention: RetentionDays.ONE_WEEK,
+      runtime: Runtime.NODEJS_16_X,
       timeout: Duration.minutes(15),
     });
 

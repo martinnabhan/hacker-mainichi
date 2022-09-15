@@ -1,10 +1,10 @@
+import { resolvers } from '@hacker-mainichi/client/graphql/resolvers';
+import { typeDefs } from '@hacker-mainichi/client/graphql/schema';
 import {
   ApolloServerPluginLandingPageDisabled,
   ApolloServerPluginLandingPageGraphQLPlayground,
 } from 'apollo-server-core';
 import { ApolloServer } from 'apollo-server-micro';
-import { typeDefs } from '@hacker-mainichi/client/graphql/schema';
-import { resolvers } from '@hacker-mainichi/client/graphql/resolvers';
 
 const server = new ApolloServer({
   cache: 'bounded',

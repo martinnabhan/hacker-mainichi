@@ -3,7 +3,7 @@
     "esModuleInterop": true,
     "incremental": true,
     "isolatedModules": true,
-    "lib": ["ES2019"],
+    "lib": ["ES2019", "DOM"],
     "module": "CommonJS",
     "sourceMap": true,
     "strict": true,

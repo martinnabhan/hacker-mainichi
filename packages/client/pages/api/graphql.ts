@@ -1,5 +1,5 @@
-import { NextApiHandler } from 'next';
 import { server } from '@hacker-mainichi/client/graphql/server';
+import { NextApiHandler } from 'next';
 
 const config = {
   api: {

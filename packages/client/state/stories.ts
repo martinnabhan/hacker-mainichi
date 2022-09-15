@@ -1,11 +1,11 @@
 /* eslint-disable no-param-reassign */
-import { createEntityAdapter, createSlice, EntityAdapter, EntityState, PayloadAction } from '@reduxjs/toolkit';
-import type { State } from '@hacker-mainichi/client/state/reducer';
 import { dates } from '@hacker-mainichi/client/lib/dates';
 import { today } from '@hacker-mainichi/client/lib/today';
+import type { State } from '@hacker-mainichi/client/state/reducer';
 import { fetchTopStories } from '@hacker-mainichi/client/thunks/fetchTopStories';
-import { visitStory } from '@hacker-mainichi/client/thunks/visitStory';
 import { fetchVisitedStories } from '@hacker-mainichi/client/thunks/fetchVisitedStories';
+import { visitStory } from '@hacker-mainichi/client/thunks/visitStory';
+import { EntityAdapter, EntityState, PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 
 const adapters: { [key: string]: EntityAdapter<Story> } = {};
 

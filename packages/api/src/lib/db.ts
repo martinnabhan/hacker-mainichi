@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
-import { DynamoDB } from 'aws-sdk';
-import { isDevelopment, TableName } from '../settings';
+import { TableName, isDevelopment } from '../settings';
+import { CreateTableCommand, DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { BatchWriteCommand, DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
 
 interface Story {
   by: string;
@@ -25,14 +26,14 @@ const devOptions = {
   region: 'us-east-1',
 };
 
-const client = new DynamoDB.DocumentClient(isDevelopment ? devOptions : undefined);
+const client = DynamoDBDocumentClient.from(new DynamoDBClient(isDevelopment ? devOptions : {}));
 
 const db = {
   createTable: async () => {
     console.log(`Creating table ${TableName}...`);
 
-    await new DynamoDB(devOptions)
-      .createTable({
+    await DynamoDBDocumentClient.from(new DynamoDBClient(devOptions)).send(
+      new CreateTableCommand({
         AttributeDefinitions: [
           { AttributeName: 'date', AttributeType: 'S' },
           { AttributeName: 'id', AttributeType: 'N' },
@@ -43,8 +44,8 @@ const db = {
           { AttributeName: 'id', KeyType: 'RANGE' },
         ],
         TableName,
-      })
-      .promise();
+      }),
+    );
 
     console.log(`Created table ${TableName}.`);
   },
@@ -59,8 +60,8 @@ const db = {
 
     await Promise.all(
       storyChunks.map(async chunkStories =>
-        client
-          .batchWrite({
+        client.send(
+          new BatchWriteCommand({
             RequestItems: {
               [TableName]: chunkStories.map(Item => ({
                 PutRequest: {
@@ -68,8 +69,8 @@ const db = {
                 },
               })),
             },
-          })
-          .promise(),
+          }),
+        ),
       ),
     );
 

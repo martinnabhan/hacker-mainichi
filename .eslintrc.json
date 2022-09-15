@@ -26,7 +26,8 @@
   "rules": {
     "@next/next/no-html-link-for-pages": ["error", ["packages/client/pages"]],
     "import/extensions": "off",
-    "import/no-extraneous-dependencies": ["error", { "packageDir": "." }],
+    "import/no-extraneous-dependencies": "off",
+    "import/order": ["error", { "alphabetize": { "order": "asc" }, "groups": [], "newlines-between": "never" }],
     "import/prefer-default-export": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "no-console": "error",
@@ -37,7 +38,9 @@
     "react/jsx-no-literals": "off",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "sort-keys": "error",
+    "sort-imports": ["error", { "ignoreDeclarationSort": true }]
   },
   "settings": {
     "import/resolver": {

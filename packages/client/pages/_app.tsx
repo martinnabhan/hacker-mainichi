@@ -1,14 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { Nav } from '@hacker-mainichi/client/components/Nav';
+import { dates } from '@hacker-mainichi/client/lib/dates';
+import { today } from '@hacker-mainichi/client/lib/today';
+import { store } from '@hacker-mainichi/client/state/store';
+import { visitedStoriesReceived } from '@hacker-mainichi/client/state/stories';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import 'tailwindcss/tailwind.css';
-import { Nav } from '@hacker-mainichi/client/components/Nav';
-import { Provider } from 'react-redux';
-import { store } from '@hacker-mainichi/client/state/store';
 import { useEffect } from 'react';
-import { today } from '@hacker-mainichi/client/lib/today';
-import { dates } from '@hacker-mainichi/client/lib/dates';
-import { visitedStoriesReceived } from '@hacker-mainichi/client/state/stories';
+import { Provider } from 'react-redux';
 
 const App = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {

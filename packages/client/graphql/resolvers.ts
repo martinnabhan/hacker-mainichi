@@ -1,7 +1,7 @@
-import { NonEmptyStringResolver as NonEmptyString, PositiveIntResolver as PositiveInt } from 'graphql-scalars';
-import { Resolvers } from '@hacker-mainichi/client/types/graphql';
-import { today } from '@hacker-mainichi/client/lib/today';
 import { dates } from '@hacker-mainichi/client/lib/dates';
+import { today } from '@hacker-mainichi/client/lib/today';
+import { Resolvers } from '@hacker-mainichi/client/types/graphql';
+import { NonEmptyStringResolver as NonEmptyString, PositiveIntResolver as PositiveInt } from 'graphql-scalars';
 
 const visited: { [key: string]: { [key: number]: true } } = {};
 

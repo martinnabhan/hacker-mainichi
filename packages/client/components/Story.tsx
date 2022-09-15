@@ -1,9 +1,9 @@
-import { selectById, selectVisited } from '@hacker-mainichi/client/state/stories';
+import { useDispatch } from '@hacker-mainichi/client/hooks/useDispatch';
 import { State } from '@hacker-mainichi/client/state/reducer';
+import { selectById, selectVisited } from '@hacker-mainichi/client/state/stories';
+import { visitStory } from '@hacker-mainichi/client/thunks/visitStory';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
-import { visitStory } from '@hacker-mainichi/client/thunks/visitStory';
-import { useDispatch } from '@hacker-mainichi/client/hooks/useDispatch';
 
 interface Props {
   date: string;

@@ -1,8 +1,8 @@
-import { Story } from '@hacker-mainichi/client/components/Story';
 import { FullScreenMessage } from '@hacker-mainichi/client/components/FullScreenMessage';
-import { useSelector } from 'react-redux';
+import { Story } from '@hacker-mainichi/client/components/Story';
 import { selectIds } from '@hacker-mainichi/client/state/stories';
 import { FunctionComponent } from 'react';
+import { useSelector } from 'react-redux';
 
 interface Props {
   date: string;
