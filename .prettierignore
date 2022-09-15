@@ -1,8 +1,10 @@
 .next/
+.wireit/
 cdk.out/
 dist/
 
 packages/client/types/graphql/index.ts
-
+.gitignore
+.prettierignore
 package-lock.json
 tsconfig.buildinfo
