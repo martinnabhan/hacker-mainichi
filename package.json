@@ -27,7 +27,8 @@
     "sharp": "^0.31.0",
     "tailwindcss": "^3.1.8",
     "tslib": "^2.4.0",
-    "typescript": "^4.8.2"
+    "typescript": "^4.8.2",
+    "wireit": "^0.7.1"
   },
   "devDependencies": {
     "@aws-cdk/aws-dynamodb": "^1.87.1",
@@ -71,7 +72,45 @@
   "name": "hacker-mainichi",
   "repository": "https://github.com/martinnabhan/hacker-mainichi",
   "scripts": {
-    "check": "prettier --check . && eslint --ignore-path .prettierignore '**/*.{graphql,js,ts,tsx}'",
-    "fix": "prettier --write . && eslint --fix --ignore-path .prettierignore '**/*.{graphql,js,ts,tsx}'"
+    "check": "wireit",
+    "check:eslint": "wireit",
+    "check:prettier": "wireit",
+    "check:tsc": "wireit",
+    "fix": "wireit",
+    "fix:eslint": "wireit",
+    "fix:prettier": "wireit"
+  },
+  "wireit": {
+    "check": {
+      "dependencies": [
+        "check:eslint",
+        "check:prettier",
+        "check:tsc"
+      ]
+    },
+    "check:eslint": {
+      "command": "eslint --ignore-path .prettierignore $(git diff --diff-filter d --name-only HEAD~1 | grep -E '\\.(graphql|js|ts|tsx)$' | xargs)"
+    },
+    "check:prettier": {
+      "command": "prettier --check $(git diff --diff-filter d --name-only HEAD~1 | xargs)"
+    },
+    "check:tsc": {
+      "dependencies": [
+        "./packages/api:check:tsc",
+        "./packages/client:check:tsc"
+      ]
+    },
+    "fix": {
+      "dependencies": [
+        "fix:eslint",
+        "fix:prettier"
+      ]
+    },
+    "fix:eslint": {
+      "command": "eslint --fix --ignore-path .prettierignore $(git diff --diff-filter d --name-only HEAD~1 | grep -E '\\.(graphql|js|ts|tsx)$' | xargs)"
+    },
+    "fix:prettier": {
+      "command": "prettier --write $(git diff --diff-filter d --name-only HEAD~1 | xargs)"
+    }
   }
 }
