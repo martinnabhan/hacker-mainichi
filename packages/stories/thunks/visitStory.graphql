@@ -1,0 +1,6 @@
+mutation Visit($date: NonEmptyString!, $ids: [PositiveInt!]!) {
+  visit(date: $date, ids: $ids) {
+    id
+    title
+  }
+}

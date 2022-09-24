@@ -1,4 +1,4 @@
-import { FullScreenMessage } from '@hacker-mainichi/client/components/FullScreenMessage';
+import { FullScreenMessage } from '@hacker-mainichi/components';
 
 const NotFound = () => <FullScreenMessage message="ページが見つかりませんでした。" />;
 

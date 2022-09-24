@@ -1,9 +1,9 @@
+import { SignInButton } from '@hacker-mainichi/auth/components';
 import { NavButton } from '@hacker-mainichi/client/components/NavButton';
 import { dates } from '@hacker-mainichi/client/lib/dates';
 import { getLocaleFormattedDate } from '@hacker-mainichi/client/lib/getLocaleFormattedDate';
 import logo from '@hacker-mainichi/client/public/logo.svg';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const Nav = () => {
@@ -20,23 +20,19 @@ const Nav = () => {
   });
 
   return (
-    <nav className="border-b border-border-color bg-white shadow-sm dark:border-border-color-dark dark:bg-secondary-dark">
-      <div className="mx-auto max-w-7xl px-4 lg:px-6">
-        <div className="flex h-24 flex-col items-center justify-between sm:h-16 sm:flex-row">
-          <Link href="/">
-            <a className="flex items-center py-2 sm:py-0">
-              <Image alt="ハッカー毎日" height="42" priority src={logo} width="155" />
-            </a>
-          </Link>
+    <nav className="flex w-full items-center gap-4 border-b border-[#393a3b] bg-[#242526] px-4 pt-2 pb-4 shadow-sm md:pb-2">
+      <div className="flex w-full flex-col items-center justify-between gap-2 sm:flex-row">
+        <div className="mr-auto -ml-2 md:ml-0">
+          <Image alt="ハッカー毎日" height="42" priority src={logo} width="155" />
+        </div>
 
-          <div className="md:block">
-            <div className="flex items-baseline space-x-2 divide-x pb-4 sm:space-x-4 sm:pb-0">
-              <NavButton href={router.asPath === '/' ? undefined : '/'}>今</NavButton>
-              <div className="flex space-x-2 pl-2 dark:border-border-color-dark sm:space-x-4 sm:pl-4">{buttons}</div>
-            </div>
-          </div>
+        <div className="flex items-center gap-2 divide-x divide-[#393a3b]">
+          <NavButton href={router.asPath === '/' ? undefined : '/'}>今</NavButton>
+          <div className="flex gap-2 pl-2">{buttons}</div>
         </div>
       </div>
+
+      <SignInButton />
     </nav>
   );
 };

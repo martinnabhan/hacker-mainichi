@@ -14,12 +14,11 @@ class MyDocument extends Document {
           <link href="https://vitals.vercel-insights.com" rel="preconnect" />
 
           <meta content="１日単位で見れる Hacker News" name="description" />
-          <meta content="#2b5797" name="msapplication-TileColor" />
-          <meta content="#fafafa" media="(prefers-color-scheme: light)" name="theme-color" />
-          <meta content="#242526" media="(prefers-color-scheme: dark)" name="theme-color" />
+          <meta content="#242526" name="msapplication-TileColor" />
+          <meta content="#242526" name="theme-color" />
         </Head>
 
-        <body className="bg-[#fafafa] dark:bg-[#242526]">
+        <body className="bg-[#18191a] text-[#e4e6eb]">
           <Main />
           <NextScript />
         </body>
