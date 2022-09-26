@@ -10,7 +10,5 @@
     "target": "ES2019",
     "outDir": "./dist"
   },
-  "exclude": ["node_modules"],
-  "extends": "../../tsconfig.json",
-  "include": ["**/*.ts"]
+  "extends": "../../tsconfig.json"
 }

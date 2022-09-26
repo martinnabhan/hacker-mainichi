@@ -2,62 +2,70 @@
   "author": "Martin Nabhan",
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "@aws-sdk/client-dynamodb": "^3.171.0",
-    "@aws-sdk/lib-dynamodb": "^3.171.0",
-    "@graphql-codegen/cli": "^2.12.0",
+    "@aws-sdk/client-dynamodb": "^3.178.0",
+    "@aws-sdk/lib-dynamodb": "^3.178.0",
+    "@graphql-codegen/cli": "^2.12.1",
     "@graphql-codegen/typed-document-node": "^2.3.3",
     "@graphql-codegen/typescript": "^2.7.3",
     "@graphql-codegen/typescript-operations": "^2.5.3",
     "@graphql-codegen/typescript-resolvers": "^2.7.3",
     "@graphql-typed-document-node/core": "^3.1.1",
+    "@headlessui/react": "^1.7.2",
     "@reduxjs/toolkit": "^1.8.5",
-    "@types/node": "^18.7.18",
-    "@types/react": "^18.0.20",
+    "@types/node": "^18.7.20",
+    "@types/nodemailer": "^6.4.6",
+    "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "@types/validator": "^13.7.7",
     "apollo-server-core": "^3.10.2",
     "apollo-server-micro": "^3.10.2",
-    "autoprefixer": "^10.4.11",
+    "autoprefixer": "^10.4.12",
+    "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
     "date-fns-tz": "^1.3.7",
+    "env-var": "^7.3.0",
     "graphql": "^16.6.0",
     "graphql-scalars": "^1.18.0",
-    "next": "^12.3.0",
+    "next": "^12.3.1",
+    "next-auth": "^4.10.3",
+    "nodemailer": "^6.7.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-redux": "^8.0.2",
+    "react-google-recaptcha-v3": "^1.10.0",
+    "react-redux": "^8.0.4",
     "sharp": "^0.31.0",
     "tailwindcss": "^3.1.8",
     "tslib": "^2.4.0",
     "typescript": "^4.8.3",
+    "validator": "^13.7.0",
     "wireit": "^0.7.1"
   },
   "devDependencies": {
-    "@graphql-eslint/eslint-plugin": "^3.10.7",
-    "@next/bundle-analyzer": "^12.3.0",
+    "@graphql-eslint/eslint-plugin": "^3.11.0",
+    "@next/bundle-analyzer": "^12.3.1",
     "@types/async-retry": "^1.4.5",
-    "@typescript-eslint/eslint-plugin": "^5.37.0",
-    "@typescript-eslint/parser": "^5.37.0",
+    "@typescript-eslint/eslint-plugin": "^5.38.0",
+    "@typescript-eslint/parser": "^5.38.0",
     "async-retry": "^1.3.3",
-    "aws-cdk": "^2.41.0",
-    "aws-cdk-lib": "^2.41.0",
+    "aws-cdk": "^2.43.1",
+    "aws-cdk-lib": "^2.43.1",
     "concurrently": "^7.4.0",
     "dotenv": "^16.0.2",
     "dynamodb-admin": "^4.4.0",
     "dynamodb-local": "0.0.31",
-    "env-var": "^7.3.0",
-    "esbuild": "^0.15.7",
-    "eslint": "8.23.1",
+    "esbuild": "^0.15.9",
+    "eslint": "8.24.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-next": "12.3.0",
+    "eslint-config-next": "12.3.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^3.5.1",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-tailwindcss": "^3.6.1",
+    "eslint-plugin-tailwindcss": "^3.6.2",
     "eslint-plugin-typescript-sort-keys": "^2.1.0",
     "graphql-config": "^4.3.5",
     "node-fetch": "^3.2.10",
-    "nodemon": "^2.0.19",
+    "nodemon": "^2.0.20",
     "prettier": "^2.7.1",
     "run-func": "^3.0.0",
     "serve": "^14.0.1",
@@ -74,7 +82,8 @@
     "check:tsc": "wireit",
     "fix": "wireit",
     "fix:eslint": "wireit",
-    "fix:prettier": "wireit"
+    "fix:prettier": "wireit",
+    "graphql-codegen": "wireit"
   },
   "wireit": {
     "check": {
@@ -91,9 +100,9 @@
       "command": "prettier --check $(git diff --diff-filter d --name-only HEAD~1 | xargs)"
     },
     "check:tsc": {
+      "command": "tsc --noEmit",
       "dependencies": [
-        "./packages/api:check:tsc",
-        "./packages/client:check:tsc"
+        "graphql-codegen"
       ]
     },
     "fix": {
@@ -107,6 +116,17 @@
     },
     "fix:prettier": {
       "command": "prettier --write $(git diff --diff-filter d --name-only HEAD~1 | xargs)"
+    },
+    "graphql-codegen": {
+      "command": "graphql-codegen --silent",
+      "files": [
+        "codegen.yml",
+        "**/schema.ts",
+        "**/*.graphql"
+      ],
+      "output": [
+        "packages/graphql/types/index.ts"
+      ]
     }
   }
 }

@@ -1,3 +1,0 @@
-query Visited($date: NonEmptyString!) {
-  visited(date: $date)
-}

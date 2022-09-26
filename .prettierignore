@@ -3,7 +3,9 @@
 cdk.out/
 dist/
 
-packages/client/types/graphql/index.ts
+packages/graphql/types/index.ts
+
+.env.local.example
 .gitignore
 .prettierignore
 package-lock.json

@@ -1,4 +1,4 @@
-import { server } from '@hacker-mainichi/client/graphql/server';
+import { server } from '@hacker-mainichi/graphql';
 import { NextApiHandler } from 'next';
 
 const config = {

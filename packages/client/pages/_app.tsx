@@ -1,16 +1,24 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { SignInDialog } from '@hacker-mainichi/auth/components';
 import { Nav } from '@hacker-mainichi/client/components/Nav';
 import { dates } from '@hacker-mainichi/client/lib/dates';
 import { today } from '@hacker-mainichi/client/lib/today';
-import { store } from '@hacker-mainichi/client/state/store';
-import { visitedStoriesReceived } from '@hacker-mainichi/client/state/stories';
-import { AppProps } from 'next/app';
+import { store } from '@hacker-mainichi/state/store';
+import { visitedStoriesReceived } from '@hacker-mainichi/stories/state';
+import { SessionProvider } from 'next-auth/react';
+import { AppProps as NextAppProps } from 'next/app';
 import Head from 'next/head';
 import 'tailwindcss/tailwind.css';
-import { useEffect } from 'react';
+import { ComponentProps, useEffect } from 'react';
 import { Provider } from 'react-redux';
 
-const App = ({ Component, pageProps }: AppProps) => {
+type AppProps<P = unknown> = Omit<NextAppProps<P>, 'pageProps'> & { pageProps: P };
+
+interface Props {
+  session: ComponentProps<typeof SessionProvider>['session'];
+}
+
+const App = ({ Component, pageProps }: AppProps<Props>) => {
   useEffect(() => {
     const visited: { [key: string]: { [key: number]: true } } = {};
 
@@ -31,17 +39,19 @@ const App = ({ Component, pageProps }: AppProps) => {
         <title>ハッカー毎日</title>
       </Head>
 
-      <div className="flex min-h-screen flex-col">
-        <Nav />
+      <Provider store={store}>
+        <div className="flex min-h-screen flex-col items-center gap-4 md:gap-12">
+          <SessionProvider session={pageProps.session}>
+            <Nav />
 
-        <main className="flex h-full grow bg-[#18191a]">
-          <div className="mx-auto max-w-7xl grow py-8 px-4 sm:py-12 sm:px-6">
-            <Provider store={store}>
+            <main className="flex h-full w-full max-w-4xl grow px-4 pb-4 md:pb-12">
               <Component {...pageProps} />
-            </Provider>
-          </div>
-        </main>
-      </div>
+            </main>
+          </SessionProvider>
+        </div>
+
+        <SignInDialog />
+      </Provider>
     </>
   );
 };

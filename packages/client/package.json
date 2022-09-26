@@ -1,39 +1,20 @@
 {
   "scripts": {
     "build": "wireit",
-    "check:tsc": "wireit",
     "dev": "wireit",
-    "graphql-codegen": "wireit",
     "start": "next start"
   },
   "wireit": {
     "build": {
       "command": "next build",
       "dependencies": [
-        "graphql-codegen"
-      ]
-    },
-    "check:tsc": {
-      "command": "tsc --noEmit",
-      "dependencies": [
-        "graphql-codegen"
+        "../..:graphql-codegen"
       ]
     },
     "dev": {
       "command": "next dev",
       "dependencies": [
-        "graphql-codegen"
-      ]
-    },
-    "graphql-codegen": {
-      "command": "graphql-codegen --silent",
-      "files": [
-        "codegen.yml",
-        "**/schema.ts",
-        "**/*.graphql"
-      ],
-      "output": [
-        "types/graphql/index.ts"
+        "../..:graphql-codegen"
       ]
     }
   }
