@@ -15,7 +15,16 @@ const desktopWidths = [
 const approximateNavHeight = 112;
 const randomNumber = () => Math.floor(Math.random() * 3) + 1;
 const randomWidth = () => desktopWidths[randomNumber()];
+const randomWidths: Record<number, string> = {};
 const storyHeight = 94;
+
+const getRandomWidth = (index: number) => {
+  if (!randomWidths[index]) {
+    randomWidths[index] = randomWidth();
+  }
+
+  return randomWidths[index];
+};
 
 const Loading = () => {
   const [storyCount, setStoryCount] = useState(Math.round(1000 / storyHeight));
@@ -28,7 +37,7 @@ const Loading = () => {
     <div className="grid w-full animate-pulse grid-cols-1 gap-4">
       {[...Array(storyCount).keys()].map(index => (
         <div key={index} className="rounded-md border border-[#393a3b] bg-[#242526] p-4 shadow-sm">
-          <div className={clsx(randomWidth(), 'mb-0.5 mt-1 h-4 w-full rounded bg-gray-600')} />
+          <div className={clsx(getRandomWidth(index), 'mb-0.5 mt-1 h-4 w-full rounded bg-gray-600')} />
 
           <div>
             <div className="mr-4 inline-block h-3 w-16 rounded bg-gray-500" />

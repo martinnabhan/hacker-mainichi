@@ -19,11 +19,7 @@ const Index = () => {
     }
   }, [dispatch, status, user]);
 
-  if (status === 'idle') {
-    return null;
-  }
-
-  if (status === 'pending') {
+  if (status === 'idle' || status === 'pending') {
     return <Loading />;
   }
 

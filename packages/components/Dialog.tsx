@@ -56,9 +56,7 @@ const Dialog: FunctionComponent<Props> = ({ children, onClose, open }) => {
           leaveFrom="opacity-100 translate-y-0 md:scale-100"
           leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
         >
-          <div className="w-full rounded-md border border-[#393a3b] bg-[#18191a] p-3 shadow-sm md:w-auto">
-            {children}
-          </div>
+          <div className="rounded-md border border-[#393a3b] bg-[#18191a] p-3 shadow-sm md:w-auto">{children}</div>
         </Transition.Child>
       </div>
     </Transition>
