@@ -2,8 +2,6 @@ import { SignInButton } from '@hacker-mainichi/auth/components';
 import { NavButton } from '@hacker-mainichi/client/components/NavButton';
 import { dates } from '@hacker-mainichi/client/lib/dates';
 import { getLocaleFormattedDate } from '@hacker-mainichi/client/lib/getLocaleFormattedDate';
-import logo from '@hacker-mainichi/client/public/logo.svg';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 const Nav = () => {
@@ -22,8 +20,10 @@ const Nav = () => {
   return (
     <nav className="flex w-full items-center gap-4 border-b border-[#393a3b] bg-[#242526] px-4 pt-2 pb-4 shadow-sm md:pb-2">
       <div className="flex w-full flex-col items-center justify-between gap-2 sm:flex-row">
-        <div className="mr-auto -ml-2 md:ml-0">
-          <Image alt="ハッカー毎日" height="42" priority src={logo} width="155" />
+        <div className="mr-auto flex items-center gap-x-2 py-2 md:py-0">
+          <NavButton className="text-xl font-bold md:text-2xl">H</NavButton>
+
+          <h1 className="text-lg font-bold text-[#506bf0]">ハッカー毎日</h1>
         </div>
 
         <div className="flex items-center gap-2 divide-x divide-[#393a3b]">
