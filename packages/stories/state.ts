@@ -94,10 +94,17 @@ const selectById = (date: string) =>
 
 const selectStatus = (date: string) => (state: State) => state.stories[date].status;
 
-const selectVisited = (date: string, id: number) => (state: State) =>
-  date === today
-    ? state.stories[today].visited.ids[id] || state.stories[dates[0]].visited.ids[id]
-    : state.stories[date].visited.ids[id];
+const selectVisited = (storyDate: string, id: number) => (state: State) => {
+  const storyDateAndEarlierDates = [today, ...dates].filter(date => date <= storyDate);
+
+  for (const date of storyDateAndEarlierDates) {
+    if (state.stories[date].visited.ids[id]) {
+      return true;
+    }
+  }
+
+  return false;
+};
 
 const selectVisitedStatus = (date: string) => (state: State) => state.stories[date].visited.status;
 
