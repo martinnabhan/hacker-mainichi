@@ -11,18 +11,16 @@ interface Props {
 }
 
 const Input: FunctionComponent<Props> = ({ autoFocus, disabled, onChange, onEnter, placeholder, type, value }) => (
-  <div className="relative w-full">
-    <input
-      autoFocus={autoFocus}
-      className="h-11 w-full appearance-none rounded bg-[#242526] px-3 shadow-inner ring-[#506bf0] placeholder:text-[#9c9ea2] focus:border-0 focus:outline-none focus:ring disabled:cursor-not-allowed disabled:bg-[#3a3b3c] md:text-sm"
-      disabled={disabled}
-      onChange={onChange}
-      onKeyDown={onEnter ? ({ key }) => key === 'Enter' && onEnter() : undefined}
-      placeholder={placeholder}
-      type={type}
-      value={value}
-    />
-  </div>
+  <input
+    autoFocus={autoFocus}
+    className="h-11 w-full appearance-none rounded bg-[#242526] px-3 shadow-inner ring-[#506bf0] placeholder:text-[#9c9ea2] focus:border-0 focus:outline-none focus:ring disabled:cursor-not-allowed disabled:bg-[#3a3b3c] md:text-sm"
+    disabled={disabled}
+    onChange={onChange}
+    onKeyDown={onEnter ? ({ key }) => key === 'Enter' && onEnter() : undefined}
+    placeholder={placeholder}
+    type={type}
+    value={value}
+  />
 );
 
 export { Input };

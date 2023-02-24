@@ -49,7 +49,7 @@ const Email: FunctionComponent<Props> = ({ email, onSubmit, setEmail }) => {
   }, [email]);
 
   return (
-    <div className="flex w-80 gap-2">
+    <div className="flex w-[calc(100vw-28px-32px)] gap-2 md:w-80">
       <Input
         autoFocus
         disabled={loading}
