@@ -18,17 +18,21 @@ const Nav = () => {
   });
 
   return (
-    <nav className="flex w-full items-center gap-4 border-b border-[#393a3b] bg-[#242526] px-4 pt-2 pb-4 shadow-sm md:pb-2">
+    <nav className="sticky top-0 z-10 flex w-full items-center gap-4 border-b border-[#393a3b] bg-[#242526] px-4 pt-2 pb-4 shadow md:px-5 md:py-4">
       <div className="flex w-full flex-col items-center justify-between gap-2 sm:flex-row">
-        <div className="mr-auto flex items-center gap-x-2 py-2 md:py-0">
-          <NavButton className="text-xl font-bold md:text-2xl">H</NavButton>
+        <button
+          className="mr-auto flex items-center gap-x-2 py-2 md:py-0"
+          onClick={() => window.scrollTo({ behavior: 'smooth', top: 0 })}
+          type="button"
+        >
+          <NavButton className="text-lg md:text-2xl">H</NavButton>
 
           <h1 className="text-lg font-bold text-[#506bf0]">ハッカー毎日</h1>
-        </div>
+        </button>
 
-        <div className="flex items-center gap-2 divide-x divide-[#393a3b]">
+        <div className="flex gap-2">
           <NavButton href={router.asPath === '/' ? undefined : '/'}>今</NavButton>
-          <div className="flex gap-2 pl-2">{buttons}</div>
+          {buttons}
         </div>
       </div>
 

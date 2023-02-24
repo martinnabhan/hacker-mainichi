@@ -9,7 +9,7 @@ const SignInButton = () => {
 
   return (
     <button
-      className="absolute top-4 right-2 flex h-7 w-7 items-center justify-center rounded-md text-sm font-medium text-[#9c9ea2] hover:bg-[#3a3b3c] md:relative md:top-0 md:right-0 lg:h-9 lg:w-9"
+      className="absolute top-4 right-3 flex h-7 w-7 items-center justify-center rounded-md text-sm font-medium text-[#9c9ea2] hover:bg-[#3a3b3c] md:relative md:top-0 md:right-0 lg:h-9 lg:w-9"
       onClick={() => (user ? signOut({ redirect: false }) : dispatch(signInDialogOpened()))}
       title={user ? 'ログアウト' : 'ログイン'}
       type="button"
